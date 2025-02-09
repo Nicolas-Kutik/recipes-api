@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const swagger = require('swagger-ui-express');
-const swaggerDocument = require('./swagger-json');
+const swaggerJsDoc = require('swagger-jsdoc');
 const recipeRouting = require('./routes/recipeRoutes')
 require('dotenv').config;
 
