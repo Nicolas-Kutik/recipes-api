@@ -1,0 +1,19 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Recipes API",
+    "version": "1.0.0",
+    "description": "API for managing recipes"
+  },
+  "paths": {
+    "/recipes": {
+      "get": { "summary": "Get all recipes" },
+      "post": { "summary": "Create a new recipe" }
+    },
+    "/recipes/{id}": {
+      "get": { "summary": "Get a recipe by ID" },
+      "put": { "summary": "Update a recipe" },
+      "delete": { "summary": "Delete a recipe" }
+    }
+  }
+}
