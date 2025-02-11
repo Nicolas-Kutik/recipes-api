@@ -1,6 +1,19 @@
 import Recipe from '../models/Recipe.js';
 
-// Create Recipe
+/**
+ * @swagger
+ * /api/v1/recipes:
+ *   post:
+ *     summary: Create a new recipe
+ *     description: Add a new recipe with name, ingredients, and instructions.
+ *     responses:
+ *       201:
+ *         description: The new recipe was created successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
 const createRecipe = async (req, res) => {
     try {
         const { name, ingredients, instructions } = req.body;
@@ -15,7 +28,18 @@ const createRecipe = async (req, res) => {
     }
 };
 
-// Get All Recipes
+/**
+ * @swagger
+ * /api/v1/recipes:
+ *   get:
+ *     summary: Get all recipes
+ *     description: Retrieve a list of all recipes.
+ *     responses:
+ *       200:
+ *         description: A list of recipes
+ *       500:
+ *         description: Server error
+ */
 const getAllRecipes = async (req, res) => {
     try {
         const recipes = await Recipe.find();
@@ -25,10 +49,23 @@ const getAllRecipes = async (req, res) => {
     }
 };
 
-// Get Single Recipe
+/**
+ * @swagger
+ * /api/v1/recipes/{id}:
+ *   get:
+ *     summary: Get a single recipe by ID
+ *     description: Retrieve a specific recipe using its ID.
+ *     responses:
+ *       200:
+ *         description: The requested recipe
+ *       404:
+ *         description: Recipe not found
+ *       500:
+ *         description: Server error
+ */
 const getRecipeById = async (req, res) => {
     try {
-        const recipe = await Recipe.findById(req.params.id, req.params.body, req.query);
+        const recipe = await Recipe.findById(req.params.id);
         if (!recipe) return res.status(404).json({ error: 'Recipe not found' });
         res.status(200).json(recipe);
     } catch (err) {
@@ -36,7 +73,22 @@ const getRecipeById = async (req, res) => {
     }
 };
 
-// Update Recipe
+/**
+ * @swagger
+ * /api/v1/recipes/{id}:
+ *   put:
+ *     summary: Update a recipe by ID
+ *     description: Update an existing recipe.
+ *     responses:
+ *       200:
+ *         description: The recipe was updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       404:
+ *         description: Recipe not found
+ *       500:
+ *         description: Server error
+ */
 const updateRecipe = async (req, res) => {
     try {
         const { name, ingredients, instructions } = req.body;
@@ -51,10 +103,23 @@ const updateRecipe = async (req, res) => {
     }
 };
 
-// Delete Recipe
+/**
+ * @swagger
+ * /api/v1/recipes/{id}:
+ *   delete:
+ *     summary: Delete a recipe by ID
+ *     description: Remove a recipe from the database.
+ *     responses:
+ *       200:
+ *         description: The recipe was deleted successfully
+ *       404:
+ *         description: Recipe not found
+ *       500:
+ *         description: Server error
+ */
 const deleteRecipe = async (req, res) => {
     try {
-        const deletedRecipe = await Recipe.findByIdAndDelete(req.params.id, req.params.body);
+        const deletedRecipe = await Recipe.findByIdAndDelete(req.params.id);
         if (!deletedRecipe) return res.status(404).json({ error: 'Recipe not found' });
         res.status(200).json(deletedRecipe);
     } catch (err) {
@@ -62,7 +127,6 @@ const deleteRecipe = async (req, res) => {
     }
 };
 
-// Export all functions as default
 export default {
     createRecipe,
     getAllRecipes,
@@ -70,3 +134,4 @@ export default {
     updateRecipe,
     deleteRecipe
 };
+
