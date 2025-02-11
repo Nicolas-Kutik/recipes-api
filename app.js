@@ -3,13 +3,13 @@ import bodyParser from 'body-parser';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import mongoose from 'mongoose';
-import recipeRouting from './routes/recipeRoutes.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 // Controllers
 import recipeController from './controllers/recipe.js';
+import recipeRouting from './routes/recipeRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,7 +33,7 @@ const openapiSpecification = swaggerJSDoc(docOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error(`Connection Failure: ${err}`));
 

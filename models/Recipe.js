@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const RecipeSchema = new mongoose.Schema({
    title: { type: 'string', required: true},
@@ -8,5 +8,4 @@ const RecipeSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Recipe', RecipeSchema);
-export default RecipeSchema;
+export default mongoose.model('Recipe', RecipeSchema);
